@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI SEO Article Wizard v3.6 (Standard Long-Form)</title>
+    <title>AI SEO Article Wizard v3.8 - Artikel SEO Gratis</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         .step-content { display: none; }
@@ -11,13 +12,13 @@
         .preview-window { height: 600px; border: 2px solid #e5e7eb; border-radius: 12px; background: #fff; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen">
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
 
     <header class="bg-gradient-to-r from-indigo-700 to-violet-800 text-white p-6 shadow-lg">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
-                <h1 class="text-2xl font-bold">🚀 AI SEO Wizard v3.6 - Artikel SEO</h1>
-                <p class="text-indigo-200 text-sm">Standard Long-Form Engine • Target Pas 1.200+ Kata • Sekali Klik Beres</p>
+                <h1 class="text-2xl font-bold">🚀 AI SEO Wizard v3.8 - Artikel SEO Generate</h1>
+                <p class="text-indigo-200 text-sm">Expanded Local Engine • Target Pas 1.200+ Kata • WhatsApp Supported</p>
             </div>
             <div class="w-full md:w-auto">
                 <label class="block text-xs font-semibold text-indigo-200 mb-1">Gemini API Key:</label>
@@ -27,17 +28,15 @@
         </div>
     </header>
 
-    <main class="container mx-auto my-8 p-8 bg-white rounded-2xl shadow-xl max-w-6xl">
+    <main class="container mx-auto my-8 p-8 bg-white rounded-2xl shadow-xl max-w-6xl flex-grow">
         
-        <!-- Navigasi Langkah -->
         <nav class="flex space-x-4 mb-8 border-b pb-4 overflow-x-auto">
-            <button onclick="gantiStep(1)" class="step-btn font-bold text-indigo-600 border-b-2 border-indigo-600">1. Riset Lokal</button>
+            <button onclick="gantiStep(1)" class="step-btn font-bold text-indigo-600 border-b-2 border-indigo-600">1. Riset Lokal (15 KW)</button>
             <button onclick="gantiStep(2)" class="step-btn text-slate-400" id="nav-step-2" disabled>2. Konfigurasi Konten</button>
             <button onclick="gantiStep(3)" class="step-btn text-slate-400" id="nav-step-3" disabled>3. Editor & Skor</button>
             <button onclick="gantiStep(4)" class="step-btn text-slate-400" id="nav-step-4" disabled>4. Pratinjau & Export</button>
         </nav>
 
-        <!-- ================= LANGKAH 1: RISET LOKAL ================= -->
         <div id="step-1" class="step-content active">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
@@ -50,9 +49,13 @@
                 </div>
             </div>
 
-            <button onclick="searchKeywords()" class="w-full bg-indigo-600 text-white py-3 rounded-lg font-bold hover:bg-indigo-700 transition">Cari Kata Kunci</button>
+            <button onclick="searchKeywords()" class="w-full bg-indigo-600 text-white py-3 rounded-lg font-bold hover:bg-indigo-700 transition mb-6">Cari Kata Kunci Lengkap</button>
 
-            <div class="mt-8 overflow-x-auto">
+            <div id="search-filter-container" class="hidden mb-4">
+                <input type="text" id="table-search" placeholder="Filter hasil kata kunci..." oninput="filterKeywords()" class="w-full p-2 border rounded-md text-sm focus:ring-2 focus:ring-indigo-500 bg-slate-50">
+            </div>
+
+            <div class="overflow-x-auto">
                 <table class="w-full text-sm border border-slate-200 rounded-lg">
                     <thead class="bg-slate-100 text-slate-700">
                         <tr>
@@ -67,7 +70,6 @@
             </div>
         </div>
 
-        <!-- ================= LANGKAH 2: KONFIGURASI KONTEN ================= -->
         <div id="step-2" class="step-content">
             <h2 class="text-xl font-bold mb-4 text-slate-800">Personalisasi AI Konten (1.200+ Kata)</h2>
             
@@ -97,7 +99,6 @@
             </div>
         </div>
 
-        <!-- ================= LANGKAH 3: EDITOR & SKOR ================= -->
         <div id="step-3" class="step-content">
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
                 <div class="lg:col-span-3">
@@ -114,7 +115,6 @@
             </div>
         </div>
 
-        <!-- ================= LANGKAH 4: PRATINJAU & EXPORT ================= -->
         <div id="step-4" class="step-content">
             <div class="mb-6 flex space-x-4">
                 <button onclick="showMode('visual')" class="px-4 py-2 bg-indigo-600 text-white rounded font-bold shadow-sm" id="btn-visual">Tampilan Web (Visual)</button>
@@ -131,11 +131,35 @@
 
             <div class="mt-8 flex space-x-4">
                 <button onclick="copyContent()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg flex-1 font-bold transition shadow">Copy Hasil Akhir HTML</button>
-                <button onclick="gantiStep(2)" class="border border-slate-300 hover:bg-slate-100 px-6 py-3 rounded-lg flex-1 text-center font-medium transition">Generate Artikel Lain</button>
+                <button onclick="gantiStep(1)" class="border border-slate-300 hover:bg-slate-100 px-6 py-3 rounded-lg flex-1 text-center font-medium transition">Riset Kata Kunci Lagi</button>
             </div>
         </div>
 
     </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800 mt-auto">
+        <div class="container mx-auto px-6 max-w-6xl flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="space-y-2 max-w-xl text-center md:text-left">
+                <p class="font-bold text-slate-300 text-sm">💡 Keterangan & Catatan Teknis Aplikasi:</p>
+                <p>1. <strong>Batas Kata Teroptimasi:</strong> Generator ini dikunci pada target 1.200 - 1.500 kata demi menjaga stabilitas JSON Object agar terhindar dari pemutusan respon (*server timeout*) pihak Google.</p>
+                <p>2. <strong>Metrik Kata Kunci:</strong> Indikator <em>Vol/Bulan</em> dan <em>Persaingan</em> bersifat data simulasi internal sistem untuk membantu pemetaan fokus topik penulisan SEO Anda.</p>
+            </div>
+            
+            <div class="flex flex-col items-center md:items-end gap-2 shrink-0">
+                <p class="font-bold text-slate-300 text-sm">Butuh Jasa Artikel Seo Premium Murah?</p>
+                <span class="text-slate-500 font-medium">Atau jasa website, iklan google/medsos atau produk digital lainnya?</span>
+                <a href="https://wa.me/6283155815259?text=Halo%20Admin%20AI%20SEO%20Wizard%2C%20saya%20ingin%20konsultasi..." 
+                   target="_blank" 
+                   class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-4 rounded-xl shadow transition flex items-center gap-2 text-sm">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.455L0 24zm6.59-4.846c1.66.986 3.296 1.498 4.805 1.499 5.482.001 9.94-4.432 9.943-9.875.002-2.637-1.03-5.115-2.906-6.992C16.613 1.884 14.135 1.05 11.5 1.05c-5.485 0-9.942 4.433-9.945 9.876-.001 1.914.512 3.738 1.482 5.334l-.112.186-.997 3.642 3.733-.974.195.116z"/>
+                    </svg>
+                    <span>Hubungi Via WhatsApp</span>
+                </a>
+                <span class="text-[10px] text-slate-600 mt-1">© 2026 AI SEO Wizard. All Rights Reserved.</span>
+            </div>
+        </div>
+    </footer>
 
     <script>
         let currentKw = "";
@@ -166,25 +190,43 @@
             
             const polaKataKunci = [
                 `Jasa ${topic} ${city}`, `${topic} murah ${city}`, `${topic} terdekat di ${city}`,
-                `Harga ${topic} ${city}`, `Rekomendasi ${topic} ${city} terbaik`
+                `Harga ${topic} ${city}`, `Rekomendasi ${topic} ${city} terbaik`, `Biaya ${topic} daerah ${city}`,
+                `Kontraktor ${topic} profesional ${city}`, `Tukang ${topic} berpengalaman ${city}`,
+                `Layanan ${topic} panggilan ${city}`, `Perusahaan ${topic} terpercaya ${city}`,
+                `Estimasi harga ${topic} ${city}`, `Paket ${topic} rumah ${city}`,
+                `Tips memilih ${topic} di ${city}`, `Daftar tarif ${topic} ${city}`, `Vendor ${topic} ${city} bergaransi`
             ];
 
             polaKataKunci.forEach((keyword, index) => {
+                let levelComp = "Rendah";
+                if (index < 5) levelComp = "Tinggi";
+                else if (index < 10) levelComp = "Sedang";
+
                 listDataKeyword.push({
                     keyword: keyword,
-                    vol: Math.floor(Math.random() * (2000 - 200)) + 200,
-                    level: index % 2 === 0 ? "Sedang" : "Rendah"
+                    vol: Math.floor(Math.random() * (3500 - 150)) + 150,
+                    level: levelComp
                 });
             });
 
+            document.getElementById('search-filter-container').classList.remove('hidden');
             renderTable(listDataKeyword);
         }
 
         function renderTable(data) {
             const tbody = document.getElementById('kw-table-body');
             tbody.innerHTML = "";
+            
+            if(data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-400 italic">Kata kunci tidak ditemukan...</td></tr>`;
+                return;
+            }
+
             data.forEach((item) => {
-                let badge = item.level === "Sedang" ? "bg-amber-100 text-amber-700" : "bg-green-100 text-green-700";
+                let badge = "bg-green-100 text-green-700";
+                if(item.level === "Sedang") badge = "bg-amber-100 text-amber-700";
+                if(item.level === "Tinggi") badge = "bg-rose-100 text-rose-700";
+
                 tbody.innerHTML += `
                     <tr class="border-b hover:bg-slate-50 transition">
                         <td class="p-3 font-medium text-slate-800">${item.keyword}</td>
@@ -198,11 +240,20 @@
             });
         }
 
+        function filterKeywords() {
+            const query = document.getElementById('table-search').value.toLowerCase();
+            const filtered = listDataKeyword.filter(item => item.keyword.toLowerCase().includes(query));
+            renderTable(filtered);
+        }
+
         function sortData(kolom) {
             const urutan = currentSortOrder[kolom] === 'asc' ? 'desc' : 'asc';
             currentSortOrder[kolom] = urutan;
             listDataKeyword.sort((a, b) => urutan === 'asc' ? a.vol - b.vol : b.vol - a.vol);
-            renderTable(listDataKeyword);
+            
+            const query = document.getElementById('table-search').value.toLowerCase();
+            const filtered = listDataKeyword.filter(item => item.keyword.toLowerCase().includes(query));
+            renderTable(filtered);
         }
          
         function pilihKw(kw) {
@@ -225,7 +276,7 @@
             const prompt = `Anda adalah seorang Pakar SEO Content Writer. Buatlah artikel pilar yang komprehensif, padat informasi, dan teroptimasi SEO lokal mengenai "${selectedKw}" di kota "${currentCity}".
 
 Aturan Konten:
-1. Total panjang keseluruhan artikel harus berada di antara 1.200 sampai 1.500 kata (Jangan kurang dari 1200 kata, dan jangan lebih dari 1500 kata).
+1. Total panjang keseluruhan artikel harus berada di antara 1.200 sampai 1.500 kata.
 2. Gaya bahasa wajib: ${toneInput}. Sisipkan nama kawasan populer berikut jika relevan: ${localDetails ? localDetails : currentCity}.
 3. Gunakan minimal 5 buah subjudul "## ".
 4. Di bagian akhir sebelum artikel selesai, wajib tambahkan judul "## FAQ" yang berisi tepat 5 buah pertanyaan dan jawaban dengan format:
@@ -260,7 +311,7 @@ Berikan output eksklusif dalam bentuk objek JSON murni tanpa tanda \`\`\`json:
                 gantiStep(3);
             } catch (error) {
                 console.error(error);
-                alert("Gagal memproses pembuatan artikel. Hal ini lumrah terjadi jika server sibuk. Silakan klik ulang tombol sekali lagi!");
+                alert("Gagal memproses pembuatan artikel. Silakan klik ulang tombol sekali lagi!");
             } finally {
                 btn.disabled = false;
                 btn.innerText = "Generate Artikel (1x Klik)";
